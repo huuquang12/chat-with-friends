@@ -1,10 +1,6 @@
 import { Redis } from "@upstash/redis";
 
-export const db = Redis.fromEnv()(async () => {
-  try {
-    const data = await db.get("key");
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-})();
+export const db = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL!,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+});
